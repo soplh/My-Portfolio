@@ -1,0 +1,6 @@
+{
+  "name": "Aura · Minimalist Portfolio",
+  "description": "A modern, minimalist portfolio website inspired by high-fashion editorial design and photography strips, featuring warm brown tones, smooth section transitions, project showcase, and interactive contact.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
