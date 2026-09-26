@@ -1,20 +1,45 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+1. Open the project in VS Code
+Open VS Code
+Click File → Open Folder
+Select your portfolio project folder (e.g. my-portfolio)
+2. Open Terminal in VS Code
+Press:
+Ctrl + ` (backtick)
+or go to Terminal → New Terminal
+3. Install dependencies
 
-# Run and deploy your AI Studio app
+Run this command:
 
-This contains everything you need to run your app locally.
+npm install
 
-View your app in AI Studio: https://ai.studio/apps/8071dae2-804b-460d-a9d1-a124347aefde
+This downloads all required packages.
 
-## Run Locally
+4. Start the development server
+npm run dev
 
-**Prerequisites:**  Node.js
+Then open the link shown in terminal, usually:
 
+http://localhost:5173
+5. Add environment file (important for contact form)
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+Create a file in the root folder:
+
+.env
+
+Add:
+
+VITE_WEB3FORMS_ACCESS_KEY=your_key_here
+6. Put your video (CIMS)
+Go to:
+public/
+Add your file:
+cims.mp4
+
+Then it will work automatically in the project.
+
+7. Build for production (optional)
+npm run build
+
+To test build:
+
+npm run preview
