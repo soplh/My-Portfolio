@@ -58,7 +58,7 @@ export const ProjectsSection: React.FC = () => {
               <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-xs text-[#78716C]">
-                    <span className="font-mono truncate max-w-[240px]">{project.client}</span>
+                    <span className="font-mono truncate max-w-60">{project.client}</span>
                     <span className="font-mono">{project.year}</span>
                   </div>
 

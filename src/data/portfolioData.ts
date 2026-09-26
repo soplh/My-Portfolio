@@ -81,7 +81,7 @@ export const PROJECTS: Project[] = [
     themeColor: "#5C3A28",
     stripType: "places",
     imageUrl: "/Screenshot (252).png",
-    videoUrl: "/cims.mp4"
+    videoUrl: "https://drive.google.com/file/d/1RqFfgIL019RZ3kGjX8bYm9vG7rgwFwtM/view?usp=sharing"
   },
   {
     id: "habesha-market",
