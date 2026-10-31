@@ -1,6 +1,6 @@
 {
-  "name": "Aura · Minimalist Portfolio",
-  "description": "A modern, minimalist portfolio website inspired by high-fashion editorial design and photography strips, featuring warm brown tones, smooth section transitions, project showcase, and interactive contact.",
+  "name": "Kalkidan's Portfolio",
+  "description": "Portfolio of Kalkidan Tadesse — Full-Stack Developer & UI/UX Designer based in Addis Ababa, Ethiopia. Featuring interactive case studies, system architecture, and product design.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
