@@ -74,7 +74,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
           {/* Visual Header / Banner */}
           <div className="relative h-56 sm:h-72 w-full rounded-lg overflow-hidden border border-[#DCD5C9]">
             <ProjectImage project={project} />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex items-end p-6 pointer-events-none">
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/30 to-transparent flex items-end p-6 pointer-events-none">
               <div>
                 <span className="text-xs font-mono uppercase tracking-widest text-[#D4B996] block mb-1">
                   {project.client}
@@ -114,7 +114,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose }) 
 
           {/* Dedicated Call to Action for Project with previewUrl */}
           {project.previewUrl && (
-            <div className="p-5 bg-gradient-to-r from-[#0E9F6E]/10 to-transparent rounded-lg border border-[#0E9F6E]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-5 bg-linear-to-r from-[#0E9F6E]/10 to-transparent rounded-lg border border-[#0E9F6E]/30 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
                 <h4 className="font-display font-bold text-sm text-[#1C1917] mb-1">
                   Interactive Figma Prototype &amp; Screens

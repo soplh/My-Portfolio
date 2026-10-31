@@ -13,8 +13,8 @@ export interface Project {
   metrics?: string;
   themeColor: string;
   imageUrl: string;
-  videoUrl?: string; // Video demo file (e.g. '/cims-demo.mp4' in public/) or YouTube/Loom URL
-  previewUrl?: string; // Live preview or Figma prototype URL (e.g. 'https://www.figma.com/proto/...')
+  videoUrl?: string; // Video demo file or online Google Drive / YouTube embed URL
+  previewUrl?: string; // Live preview or prototype URL
   stripType?: 'people' | 'places' | 'sports' | 'architecture' | 'clock';
   highlights?: {
     brandIdentity?: string[];

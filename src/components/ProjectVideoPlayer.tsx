@@ -1,49 +1,75 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import { Play, Video } from 'lucide-react';
 
+/**
+ * Online Google Drive Video URL:
+ * Paste your Google Drive video link below.
+ * Example formats supported:
+ * - https://drive.google.com/file/d/YOUR_FILE_ID/preview
+ * - https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing
+ * - https://drive.google.com/open?id=YOUR_FILE_ID
+ */
+export const projectVideoUrl = "https://drive.google.com/file/d/1RqFfgIL019RZ3kGjX8bYm9vG7rgwFwtM/view?usp=sharing";
+
 interface ProjectVideoPlayerProps {
-  videoUrl: string;
+  videoUrl?: string;
   title: string;
 }
 
+/**
+ * Converts Google Drive, YouTube, Loom, or other video URLs into embeddable iframe URLs.
+ */
+function getEmbedUrl(url: string): string | null {
+  if (!url || typeof url !== 'string') return null;
+  const trimmed = url.trim();
+  if (!trimmed || trimmed === 'PASTE_LINK_HERE') return null;
+
+  // 1. Google Drive URLs
+  // Case A: Already preview embed URL: https://drive.google.com/file/d/.../preview
+  if (trimmed.includes('drive.google.com') && trimmed.includes('/preview')) {
+    return trimmed;
+  }
+
+  // Case B: Standard view link: https://drive.google.com/file/d/FILE_ID/view or /view?usp=sharing
+  const gDriveMatch = trimmed.match(/drive\.google\.com\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (gDriveMatch && gDriveMatch[1]) {
+    return `https://drive.google.com/file/d/${gDriveMatch[1]}/preview`;
+  }
+
+  // Case C: Open with ID: https://drive.google.com/open?id=FILE_ID or https://drive.google.com/uc?id=FILE_ID
+  const gDriveIdMatch = trimmed.match(/drive\.google\.com\/(?:open|uc)\?[^#]*\bid=([a-zA-Z0-9_-]+)/);
+  if (gDriveIdMatch && gDriveIdMatch[1]) {
+    return `https://drive.google.com/file/d/${gDriveIdMatch[1]}/preview`;
+  }
+
+  // 2. YouTube
+  if (trimmed.includes('youtube.com/watch?v=')) {
+    const id = trimmed.split('watch?v=')[1]?.split('&')[0];
+    return `https://www.youtube.com/embed/${id}`;
+  }
+  if (trimmed.includes('youtu.be/')) {
+    const id = trimmed.split('youtu.be/')[1]?.split('?')[0];
+    return `https://www.youtube.com/embed/${id}`;
+  }
+
+  // 3. Loom
+  if (trimmed.includes('loom.com/share/')) {
+    return trimmed.replace('/share/', '/embed/');
+  }
+
+  // 4. Any direct HTTPS URL
+  if (trimmed.startsWith('http://') || trimmed.startsWith('https://')) {
+    return trimmed;
+  }
+
+  return null;
+}
+
 export const ProjectVideoPlayer: React.FC<ProjectVideoPlayerProps> = ({ videoUrl, title }) => {
-  const [videoSrc, setVideoSrc] = useState<string>(() => {
-    return localStorage.getItem('demo_video_' + title) || videoUrl;
-  });
-  const [hasError, setHasError] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  // Prefer the project-level video URL, then fall back to any explicitly passed URL.
+  const activeUrl = projectVideoUrl || videoUrl || '';
 
-  // Helper to detect YouTube / Vimeo / Loom
-  const getEmbedUrl = (url: string) => {
-    if (url.includes('youtube.com/watch?v=')) {
-      const id = url.split('watch?v=')[1]?.split('&')[0];
-      return `https://www.youtube.com/embed/${id}`;
-    }
-    if (url.includes('youtu.be/')) {
-      const id = url.split('youtu.be/')[1]?.split('?')[0];
-      return `https://www.youtube.com/embed/${id}`;
-    }
-    if (url.includes('loom.com/share/')) {
-      return url.replace('/share/', '/embed/');
-    }
-    return null;
-  };
-
-  const embedUrl = getEmbedUrl(videoSrc);
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const url = URL.createObjectURL(file);
-      setVideoSrc(url);
-      setHasError(false);
-      try {
-        localStorage.setItem('demo_video_' + title, url);
-      } catch {
-        // Quota safety
-      }
-    }
-  };
+  const embedUrl = getEmbedUrl(activeUrl || '');
 
   return (
     <div className="space-y-3">
@@ -52,59 +78,32 @@ export const ProjectVideoPlayer: React.FC<ProjectVideoPlayerProps> = ({ videoUrl
           <Video className="w-4 h-4 text-[#7C4A32]" />
           <span>Interactive Video Demo &amp; System Walkthrough</span>
         </h4>
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          className="text-[11px] font-mono text-[#8C7A6D] hover:text-[#5C3A28] underline cursor-pointer"
-        >
-          Select Video File
-        </button>
       </div>
 
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept="video/*"
-        onChange={handleFileChange}
-        className="hidden"
-        aria-label="Upload video demo file"
-      />
-
-      <div className="relative w-full rounded-lg overflow-hidden bg-black border border-[#D5CDC0] aspect-video">
+      <div className="relative w-full rounded-lg overflow-hidden bg-black border border-[#D5CDC0] aspect-video shadow-md">
         {embedUrl ? (
           <iframe
             src={embedUrl}
             title={title}
             className="w-full h-full border-0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen
           />
-        ) : !hasError ? (
-          <video
-            src={videoSrc}
-            controls
-            playsInline
-            preload="metadata"
-            className="w-full h-full object-contain"
-            onError={() => setHasError(true)}
-          />
         ) : (
-          <div
-            onClick={() => fileInputRef.current?.click()}
-            className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-[#1A120E] text-[#D9BAA3] cursor-pointer hover:bg-[#251A14] transition-colors"
-          >
-            <div className="w-12 h-12 rounded-full bg-[#34241B] flex items-center justify-center text-[#D4B996] mb-3">
-              <Play className="w-6 h-6 ml-0.5 fill-current" />
+          <div className="w-full h-full flex flex-col items-center justify-center p-6 text-center bg-[#1E1815] text-[#E7DFD5]">
+            <div className="w-12 h-12 rounded-full bg-[#352720] border border-[#554035] flex items-center justify-center text-[#D4B996] mb-3">
+              <Play className="w-5 h-5 ml-0.5 fill-current" />
             </div>
-            <p className="text-sm font-semibold text-white mb-1">
-              Video Demo Ready
+            <h5 className="font-display text-sm font-semibold text-white mb-1">
+              Online Video Demo
+            </h5>
+            <p className="text-xs text-[#A8988B] max-w-md leading-relaxed">
+              Google Drive video demonstration for {title}. Paste your online Google Drive URL into{' '}
+              <code className="text-[#D4B996] bg-black/60 px-1.5 py-0.5 rounded font-mono">
+                projectVideoUrl
+              </code>{' '}
+              to play the video.
             </p>
-            <p className="text-xs text-[#A8988B] max-w-sm mb-3">
-              Place <code className="text-[#D4B996] bg-black/40 px-1 py-0.5 rounded">public/cims.mp4</code> or click here to choose a video file from your computer.
-            </p>
-            <span className="text-xs font-mono text-[#E5D7CA] border border-white/20 px-3 py-1 rounded bg-white/5">
-              Browse Video File
-            </span>
           </div>
         )}
       </div>

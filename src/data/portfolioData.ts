@@ -65,6 +65,16 @@ export const SKILL_CATEGORIES: SkillCategory[] = [
   }
 ];
 
+// ============================================================================
+// ONLINE GOOGLE DRIVE VIDEO DEMO URL (Chemical Inventory Management System)
+// Paste your Google Drive video link into the variable below.
+// Supported formats:
+// - https://drive.google.com/file/d/YOUR_FILE_ID/view?usp=sharing
+// - https://drive.google.com/file/d/YOUR_FILE_ID/preview
+// - https://drive.google.com/open?id=YOUR_FILE_ID
+// ============================================================================
+export const projectVideoUrl = "https://drive.google.com/file/d/1RqFfgIL019RZ3kGjX8bYm9vG7rgwFwtM/view?usp=sharing";
+
 export const PROJECTS: Project[] = [
   {
     id: "cims-eiar",
@@ -81,7 +91,7 @@ export const PROJECTS: Project[] = [
     themeColor: "#5C3A28",
     stripType: "places",
     imageUrl: "/Screenshot (252).png",
-    videoUrl: "https://drive.google.com/file/d/1RqFfgIL019RZ3kGjX8bYm9vG7rgwFwtM/view?usp=sharing"
+    videoUrl: projectVideoUrl
   },
   {
     id: "habesha-market",
@@ -187,7 +197,6 @@ export const SECTIONS_CONFIG = [
 // To receive messages directly in your inbox, paste your free access key below
 // or define VITE_WEB3FORMS_ACCESS_KEY in your .env file.
 export const WEB3FORMS_CONFIG = {
-  accessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "89e1da99-55be-4cd1-8b2c-07c7d7494465",
+  accessKey: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY || "",
   targetEmail: "tadessekalkidan05@gmail.com"
 };
-

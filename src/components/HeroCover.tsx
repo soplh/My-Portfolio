@@ -59,8 +59,8 @@ export const HeroCover: React.FC<HeroCoverProps> = ({ onExploreClick, onContactC
       />
 
       {/* Subtle background noise texture & atmospheric lighting */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#1F1916] via-[#161210] to-[#120E0C] pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[360px] bg-[#7C4A32]/15 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute inset-0 bg-linear-to-b from-[#1F1916] via-[#161210] to-[#120E0C] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-175 h-90 bg-[#7C4A32]/15 blur-[120px] rounded-full pointer-events-none" />
 
       {/* Spacer to balance top margin */}
       <div className="w-full h-2" />
@@ -83,7 +83,7 @@ export const HeroCover: React.FC<HeroCoverProps> = ({ onExploreClick, onContactC
           <div className="absolute inset-0 flex items-center justify-center pointer-events-auto">
             <div
               onClick={triggerUpload}
-              className="group relative w-[280px] sm:w-[340px] md:w-[420px] lg:w-[460px] h-[350px] sm:h-[410px] md:h-[490px] lg:h-[530px] transition-transform duration-500 hover:scale-[1.02] rounded-lg overflow-hidden shadow-2xl border border-[#3E2E25]/60 bg-[#241A14] cursor-pointer"
+              className="group relative w-70 sm:w-85 md:w-105 lg:w-115 h-87.5 sm:h-102.5 md:h-122.5 lg:h-132.5 transition-transform duration-500 hover:scale-[1.02] rounded-lg overflow-hidden shadow-2xl border border-[#3E2E25]/60 bg-[#241A14] cursor-pointer"
               title="Click to select or change original photo k.jpg"
             >
               {!hasError ? (
@@ -108,7 +108,7 @@ export const HeroCover: React.FC<HeroCoverProps> = ({ onExploreClick, onContactC
                   <span className="font-display font-bold text-sm text-[#F5EDE4] mb-1">
                     Click to load original photo
                   </span>
-                  <span className="text-xs text-[#A8988B] max-w-[200px] leading-relaxed">
+                  <span className="text-xs text-[#A8988B] max-w-52 leading-relaxed">
                     Select <code className="text-[#D4B996] font-mono">k.jpg</code> to display your photograph as it is
                   </span>
                 </div>
@@ -128,7 +128,7 @@ export const HeroCover: React.FC<HeroCoverProps> = ({ onExploreClick, onContactC
         <div className="flex items-center gap-3">
           <button
             onClick={onExploreClick}
-            className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#1C1613] bg-[#D4B996] hover:bg-[#E2CDAE] rounded-md transition-all duration-200 shadow-md cursor-pointer hover:translate-y-[-1px]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 text-xs font-semibold tracking-wider uppercase text-[#1C1613] bg-[#D4B996] hover:bg-[#E2CDAE] rounded-md transition-all duration-200 shadow-md cursor-pointer hover:-translate-y-px"
           >
             <span>Explore Sections</span>
             <ArrowDown className="w-3.5 h-3.5" />

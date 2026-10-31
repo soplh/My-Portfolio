@@ -61,7 +61,7 @@ export const PanoramicStrips: React.FC<PanoramicStripsProps> = ({ onSelectSectio
               onMouseEnter={() => setHoveredStrip(strip.id)}
               onMouseLeave={() => setHoveredStrip(null)}
               onClick={() => onSelectSection(strip.targetId)}
-              className="group relative w-full h-[160px] sm:h-[190px] md:h-[230px] lg:h-[260px] overflow-hidden cursor-pointer transition-all duration-500 ease-out flex items-center justify-center"
+              className="group relative w-full h-40 sm:h-47.5 md:h-57.5 lg:h-65 overflow-hidden cursor-pointer transition-all duration-500 ease-out flex items-center justify-center"
               role="button"
               tabIndex={0}
               onKeyDown={(e) => {
@@ -90,7 +90,7 @@ export const PanoramicStrips: React.FC<PanoramicStripsProps> = ({ onSelectSectio
               />
 
               {/* Subtle film grain & gradient mask */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-black/40 pointer-events-none" />
 
               {/* Centered Title (Only text retained) */}
               <div className="relative z-10 flex items-center justify-center p-6 text-center">
